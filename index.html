@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ASCA Office Solutions — Site Survey</title>
+<meta name="description" content="ASCA Office Solutions site survey, logistics and connectivity form.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0b0b0d;
+    --ink-2:#141417;
+    --ink-3:#1c1c21;
+    --bone:#e9e4da;
+    --bone-dim:#b6b0a3;
+    --paper:#f4f1ea;
+    --paper-2:#ece7dc;
+    --line:rgba(20,20,23,.12);
+    --gold:#c9a45c;
+    --gold-2:#e3c98a;
+    --chrome:linear-gradient(120deg,#f4e2b0,#c9a45c 45%,#f4e2b0 70%,#a8853e);
+    --ok:#2e7d32;
+    --radius:18px;
+    --shadow-lg:0 24px 80px -24px rgba(11,11,13,.45);
+    --util-w:64rem;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-font-smoothing:antialiased}
+  html{scroll-behavior:smooth}
+  body{font-family:'Manrope',sans-serif;background:var(--ink);color:var(--bone);line-height:1.65;overflow-x:hidden}
+  main{overflow-x:hidden;width:100%;max-width:100%}
+  ::selection{background:var(--gold);color:var(--ink)}
+
+  /* ─────────────── NAV ─────────────── */
+  .nav{position:fixed;top:18px;left:50%;transform:translateX(-50%);z-index:200;background:rgba(20,20,23,.72);backdrop-filter:blur(18px) saturate(1.4);border:1px solid rgba(233,228,218,.10);border-radius:999px;padding:10px 14px 10px 20px;display:flex;align-items:center;gap:14px;box-shadow:0 12px 40px -12px rgba(0,0,0,.6);width:calc(100% - 32px);max-width:64rem}
+  .nav .brand{display:flex;align-items:baseline;gap:8px;font-family:'Outfit',sans-serif}
+  .nav .brand b{font-size:16px;font-weight:700;letter-spacing:.02em;background:var(--chrome);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .nav .brand span{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--bone-dim)}
+  .nav .spacer{flex:1}
+  .nav .phone{font-size:13px;color:var(--bone-dim);letter-spacing:.02em;white-space:nowrap}
+  .nav .cta{text-decoration:none;font-size:13px;font-weight:600;color:var(--ink);background:var(--gold-2);padding:9px 18px;border-radius:999px;white-space:nowrap;transition:transform .35s cubic-bezier(.2,.9,.25,1),background .3s}
+  .nav .cta:hover{background:#f6e6b6;transform:translateY(-1px)}
+  @media(max-width:560px){.nav .phone{display:none}}
+
+  /* ─────────────── HERO ─────────────── */
+  .hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:120px 20px 60px;background:radial-gradient(120% 90% at 50% -10%,#1d1d24 0%,var(--ink) 55%)}
+  .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(60% 50% at 50% 100%,rgba(201,164,92,.12) 0%,transparent 60%);pointer-events:none}
+  .noise{position:absolute;inset:0;opacity:.05;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+  .hero .eyebrow{font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--bone-dim);margin-bottom:26px;display:flex;align-items:center;gap:14px}
+  .hero .eyebrow::before,.hero .eyebrow::after{content:'';width:34px;height:1px;background:var(--line);}
+  .hero .eyebrow::before{background:linear-gradient(90deg,transparent,var(--bone-dim))}
+  .hero .eyebrow::after{background:linear-gradient(90deg,var(--bone-dim),transparent)}
+  .hero h1{font-family:'Outfit',sans-serif;font-weight:600;letter-spacing:-.02em;line-height:1.04;font-size:clamp(2.6rem,5.5vw,5rem);max-width:72rem;margin:0 auto}
+  .hero h1 .gold{background:var(--chrome);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:700}
+  .hero h1 .inline-img{display:inline-block;width:.62em;height:.62em;border-radius:999px;background-size:cover;background-position:center;vertical-align:.06em;margin:0 .06em;border:1px solid rgba(233,228,218,.2)}
+  .hero .lede{max-width:34rem;margin:26px auto 0;font-size:15px;color:var(--bone-dim);font-weight:300}
+  .hero .lede b{color:var(--bone);font-weight:500}
+  .hero .ctas{display:flex;gap:14px;margin-top:40px;flex-wrap:wrap;justify-content:center}
+  .btn{padding:15px 30px;border-radius:999px;font-size:14px;font-weight:600;text-decoration:none;cursor:pointer;transition:transform .35s cubic-bezier(.2,.9,.25,1),background .3s,color .3s,border-color .3s;border:1px solid transparent;display:inline-flex;align-items:center;gap:9px;font-family:'Manrope',sans-serif}
+  .btn svg{width:15px;height:15px}
+  .btn-primary{background:var(--gold-2);color:var(--ink)}
+  .btn-primary:hover{background:#f6e6b6;transform:translateY(-2px)}
+  .btn-ghost{border-color:rgba(233,228,218,.22);color:var(--bone)}
+  .btn-ghost:hover{border-color:var(--gold);color:var(--gold-2);transform:translateY(-2px)}
+  .placeholder{position:absolute;left:-9999px;top:0;width:1px;height:1px;opacity:0;pointer-events:none}
+  .scroll-hint{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);color:var(--bone-dim);font-size:11px;letter-spacing:.3em;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:12px;opacity:.8}
+  .scroll-hint .line{width:1px;height:46px;background:linear-gradient(180deg,var(--gold),transparent);animation:drop 2.2s infinite}
+  @keyframes drop{0%{transform:scaleY(0);transform-origin:top}55%{transform:scaleY(1);transform-origin:top}100%{transform:scaleY(0);transform-origin:bottom}}
+
+  /* ─────────────── PROGRESS RAIL ─────────────── */
+  .rail-wrap{position:sticky;top:84px;z-index:120;padding:12px 20px 0}
+  .rail{max-width:var(--util-w);margin:0 auto;display:flex;align-items:center;gap:6px;background:rgba(20,20,23,.72);backdrop-filter:blur(16px);border:1px solid rgba(233,228,218,.10);border-radius:999px;padding:9px 14px}
+  .rail .idx{font-family:'Outfit',sans-serif;font-size:12px;color:var(--bone-dim);min-width:82px;letter-spacing:.06em}
+  .rail .idx b{color:var(--gold-2);font-weight:700}
+  .rail .track{flex:1;display:flex;gap:5px}
+  .rail .seg{flex:1;height:4px;border-radius:2px;background:rgba(233,228,218,.14);transition:background .45s}
+  .rail .seg.on{background:var(--gold)}
+  .rail .seg.done{background:var(--gold-2);opacity:.55}
+
+  /* ─────────────── SURVEY ─────────────── */
+  .survey{max-width:var(--util-w);margin:34px auto 0;padding:0 20px 40px}
+  .stage{display:none;will-change:translate,opacity}
+  .stage.show{display:block}
+  .card{background:linear-gradient(180deg,var(--ink-2) 0%,var(--ink-3) 100%);border:1px solid rgba(233,228,218,.08);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-lg)}
+  .card-head{display:flex;align-items:flex-start;gap:18px;padding:34px 34px 26px;border-bottom:1px solid rgba(233,228,218,.07)}
+  .card-head .num{font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:var(--ink);background:var(--chrome);border-radius:999px;padding:6px 13px;flex-shrink:0;margin-top:2px}
+  .card-head h2{font-family:'Outfit',sans-serif;font-size:clamp(1.35rem,2.4vw,1.8rem);font-weight:600;letter-spacing:-.01em;line-height:1.15}
+  .card-head p{font-size:13px;color:var(--bone-dim);margin-top:5px;font-weight:300}
+  .card-body{padding:30px 34px 34px}
+
+  /* Field grid — gapless dense 12-col composition */
+  .grid{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-flow:dense;column-gap:22px;row-gap:22px}
+  .f{position:relative}
+  .f span12{grid-column:span 12}
+  .f span6{grid-column:span 6}
+  .f span4{grid-column:span 4}
+  @media(max-width:640px){.f span12,.f span6,.f span4{grid-column:span 12}}
+
+  .f label{display:block;font-size:13px;font-weight:500;color:var(--bone-dim);margin-bottom:8px;letter-spacing:.01em}
+  .f label .req{color:var(--gold);margin-left:2px}
+  .f .hint{font-size:12.5px;color:var(--bone-dim);opacity:.85;margin:-4px 0 8px;font-weight:300;line-height:1.55}
+  .f input,.f select,.f textarea{width:100%;padding:15px 17px;background:rgba(11,11,13,.55);border:1px solid rgba(233,228,218,.12);border-radius:12px;color:var(--bone);font-family:'Manrope',sans-serif;font-size:16px;line-height:1.5;transition:border-color .3s,box-shadow .3s,background .3s;font-weight:400}
+  .f input::placeholder,.f textarea::placeholder{color:var(--bone-dim);opacity:.6;font-size:15px}
+  .f input:focus,.f select:focus,.f textarea:focus{outline:none;border-color:var(--gold);background:rgba(11,11,13,.85);box-shadow:0 0 0 3px rgba(201,164,92,.12)}
+  .f select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23b6b0a3' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 17px center}
+  .f select option{background:var(--ink-2);color:var(--bone);font-size:15px}
+  .f textarea{min-height:120px;resize:vertical}
+
+  /* Pill radios / checkboxes */
+  .pills{display:flex;flex-wrap:wrap;gap:9px}
+  .pill{position:relative}
+  .pill input{position:absolute;opacity:0;pointer-events:none}
+  .pill span{display:inline-block;padding:11px 18px;border:1px solid rgba(233,228,218,.14);border-radius:999px;font-size:14px;color:var(--bone-dim);cursor:pointer;transition:all .28s;user-select:none}
+  .pill span:hover{border-color:var(--gold);color:var(--gold-2)}
+  .pill input:checked+span{border-color:var(--gold);color:var(--ink);background:var(--gold-2);font-weight:600}
+
+  /* Feature reveal panels */
+  .feat{margin-bottom:14px}
+  .feat .bar{width:100%;display:flex;align-items:center;gap:14px;text-align:left;padding:15px 18px;background:rgba(11,11,13,.4);border:1px solid rgba(233,228,218,.10);border-radius:14px;cursor:pointer;font-family:'Manrope',sans-serif;color:var(--bone);transition:border-color .3s,background .3s;font-size:14px}
+  .feat .bar:hover{border-color:rgba(201,164,92,.5);background:rgba(11,11,13,.6)}
+  .feat .bar .ico{width:34px;height:34px;border-radius:9px;background:rgba(233,228,218,.06);border:1px solid rgba(233,228,218,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:.3s}
+  .feat .bar .ico svg{width:16px;height:16px;stroke:var(--bone-dim)}
+  .feat .bar .ttl{flex:1}
+  .feat .bar .ttl strong{display:block;font-size:13.5px;font-weight:600}
+  .feat .bar .ttl em{display:block;font-style:normal;font-size:11.5px;color:var(--bone-dim);font-weight:300}
+  .feat .bar .chev{transition:transform .35s;flex-shrink:0;color:var(--bone-dim)}
+  .feat .bar .chev svg{width:14px;height:14px;stroke:currentColor}
+  .feat.on .bar{border-color:var(--gold)}
+  .feat.on .bar .ico{background:var(--gold);border-color:var(--gold)}
+  .feat.on .bar .ico svg{stroke:var(--ink)}
+  .feat.on .bar .chev{transform:rotate(90deg);color:var(--gold)}
+  .feat .panel{overflow:hidden;height:0}
+  .feat .panel-in{padding:20px 18px 6px;display:grid;grid-template-columns:repeat(12,1fr);column-gap:22px;row-gap:22px}
+
+  /* Equipment cards */
+  .stack{display:flex;flex-direction:column;gap:16px}
+  .eq{background:rgba(11,11,13,.4);border:1px solid rgba(233,228,218,.10);border-radius:16px;padding:24px;position:relative;transition:border-color .3s}
+  .eq:hover{border-color:rgba(201,164,92,.35)}
+  .eq .hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+  .eq .hd .t{font-family:'Outfit',sans-serif;font-weight:600;font-size:15px;display:flex;align-items:center;gap:10px}
+  .eq .hd .t::before{content:'';width:26px;height:26px;border-radius:7px;background:var(--chrome);display:inline-block}
+  .eq .rm{background:none;border:1px solid rgba(233,228,218,.16);color:var(--bone-dim);border-radius:8px;padding:6px 12px;font-size:12px;cursor:pointer;transition:.25s;font-family:'Manrope',sans-serif}
+  .eq .rm:hover{border-color:var(--gold);color:var(--gold-2)}
+  .add{width:100%;padding:16px;border:1.5px dashed rgba(201,164,92,.45);border-radius:16px;background:transparent;color:var(--gold-2);font-family:'Manrope',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center;gap:9px}
+  .add svg{width:16px;height:16px;stroke:currentColor}
+  .add:hover{background:rgba(201,164,92,.07);border-style:solid}
+
+  /* Step buttons */
+  .btns{display:flex;justify-content:space-between;gap:12px;margin-top:30px;padding-top:24px;border-top:1px solid rgba(233,228,218,.07)}
+  .btn-back{background:transparent;border:1px solid rgba(233,228,218,.16);color:var(--bone-dim)}
+  .btn-back:hover{border-color:var(--bone);color:var(--bone)}
+  .btn-next{margin-left:auto;background:var(--gold-2);color:var(--ink)}
+  .btn-next:hover{background:#f6e6b6}
+  .btn-submit{margin-left:auto;background:var(--gold);color:var(--ink)}
+  .btn-submit:hover{background:var(--gold-2)}
+  .btn:disabled{opacity:.55;cursor:not-allowed;transform:none}
+
+  /* Success */
+  .done{display:none;text-align:center;padding:90px 26px}
+  .done.show{display:block}
+  .done .ring{width:96px;height:96px;border-radius:50%;background:var(--chrome);display:flex;align-items:center;justify-content:center;margin:0 auto 30px}
+  .done .ring svg{width:44px;height:44px;stroke:var(--ink)}
+  .done h2{font-family:'Outfit',sans-serif;font-size:clamp(1.8rem,3vw,2.6rem);font-weight:600;letter-spacing:-.015em;margin-bottom:12px}
+  .done p{color:var(--bone-dim);font-size:15px;max-width:30rem;margin:0 auto;font-weight:300}
+  .done .ph{color:var(--gold-2);font-weight:600;margin-top:22px}
+
+  /* Marquee */
+  .marquee{overflow:hidden;padding:26px 0;border-top:1px solid rgba(233,228,218,.06);border-bottom:1px solid rgba(233,228,218,.06);margin:10px 0 0}
+  .marquee .track{display:flex;gap:56px;white-space:nowrap;width:max-content;animation:slide 28s linear infinite}
+  .marquee .track span{font-family:'Outfit',sans-serif;font-size:15px;letter-spacing:.32em;text-transform:uppercase;color:var(--bone-dim);display:flex;align-items:center;gap:56px}
+  .marquee .track span::after{content:'';width:5px;height:5px;border-radius:50%;background:var(--gold)}
+  .marquee:hover .track{animation-play-state:paused}
+  @keyframes slide{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+  /* Footer */
+  footer{padding:54px 20px 60px;text-align:center}
+  footer .row{display:flex;flex-direction:column;align-items:center;gap:8px}
+  footer .word{font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;background:var(--chrome);-webkit-background-clip:text;background-clip:text;color:transparent}
+  footer .meta{font-size:12.5px;color:var(--bone-dim);letter-spacing:.02em}
+  footer .meta a{color:var(--gold-2);text-decoration:none}
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═══════════ NAV ═══════════ -->
+<nav class="nav">
+  <div class="brand"><b>ASCA</b><span>Office Solutions</span></div>
+  <div class="spacer"></div>
+  <div class="phone">416-240-1700</div>
+  <a class="cta" href="#survey">Begin Survey</a>
+</nav>
+
+<!-- ═══════════ HERO ═══════════ -->
+<header class="hero">
+  <div class="noise"></div>
+  <div class="eyebrow">Site Survey &mdash; Logistics &amp; Connectivity</div>
+  <h1>
+    A finer way to
+    <span class="inline-img" style="background-image:url('https://picsum.photos/seed/officepad/96/96')"></span>
+    prepare your
+    <span class="gold">site.</span>
+  </h1>
+  <p class="lede">
+    We photograph the details so nothing delays your installation &mdash;
+    <b>power, network, delivery</b> and every machine on the floor.
+  </p>
+  <div class="ctas">
+    <a class="btn btn-primary" href="#survey">
+      Begin the Survey
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <a class="btn btn-ghost" href="tel:4162401700">Request a Call Back</a>
+  </div>
+  <div class="scroll-hint">Scroll<div class="line"></div></div>
+</header>
+
+<!-- ═══════════ PROGRESS RAIL ═══════════ -->
+<div class="rail-wrap">
+  <div class="rail">
+    <div class="idx"><b id="curIdx">01</b>&nbsp;/&nbsp;09</div>
+    <div class="track" id="railTrack">
+      <div class="seg" data-s="1"></div><div class="seg" data-s="2"></div><div class="seg" data-s="3"></div>
+      <div class="seg" data-s="4"></div><div class="seg" data-s="5"></div><div class="seg" data-s="6"></div>
+      <div class="seg" data-s="7"></div><div class="seg" data-s="8"></div><div class="seg" data-s="9"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ SURVEY ═══════════ -->
+<section class="survey" id="survey">
+<form id="form" autocomplete="off">
+<div style="display:none"><img class="placeholder" src="https://picsum.photos/seed/officepad/96/96" alt=""></div>
+
+<!-- ─── 01 Order ─── -->
+<div class="stage show" data-stage="1">
+  <div class="card">
+    <div class="card-head">
+      <div class="num">01</div>
+      <div><h2>Order Reference</h2><p>The details we file everything against.</p></div>
+    </div>
+    <div class="card-body">
+      <div class="grid">
+        <div class="f span6"><label>Sales Order # <span class="req">*</span></label><input name="sales_order" placeholder="SO-2026-0112" required></div>
+        <div class="f span6"><label>Survey Date <span class="req">*</span></label><input type="date" name="survey_date" required></div>
+        <div class="f span12"><label>Survey Completed By <span class="req">*</span></label><input name="completed_by" placeholder="Your name" required></div>
+      </div>
+    </div>
+    <div class="card-body btns"><button type="button" class="btn btn-next" onclick="go(2)">Continue <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px"><path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+  </div>
+</div>
+
+<!-- ─── 02 Customer ─── -->
+<div class="stage" data-stage="2">
+  <div class="card">
+    <div class="card-head">
+      <div class="num">02</div>
+      <div><h2>Customer Information</h2><p>Who are we working with?</p></div>
+    </div>
+    <div class="card-body">
+      <div class="grid">
+        <div class="f span12"><label>Customer / Company Name <span class="req">*</span></label><input name="cust_name" placeholder="Company name" required></div>
+        <div class="f span12"><label>Site Address <span class="req">*</span></label><input name="cust_addr" placeholder="Street address" required></div>
+        <div class="f span4"><label>City <span class="req">*</span></label><input name="cust_city" placeholder="City" required></div>
+        <div class="f span4"><label>Province <span class="req">*</span></label><input name="cust_prov" placeholder="ON" required></div>
+        <div class="f span4"><label>Postal Code <span class="req">*</span></label><input name="cust_postal" placeholder="L4L 7G4" required></div>
+        <div class="f span12"><label>Contact Name <span class="req">*</span></label><input name="cust_contact" placeholder="Primary contact" required></div>
+        <div class="f span6"><label>Phone / Ext / Cell <span class="req">*</span></label><input name="cust_phone" placeholder="(416) 000-0000" required></div>
+        <div class="f span6"><label>Email <span class="req">*</span></label><input type="email" name="cust_email" placeholder="name@company.com" required></div>
+        <div class="f span12"><label>Fax</label><input name="cust_fax" placeholder="If applicable"></div>
+      </div>
+    </div>
+    <div class="card-body btns">
+      <button type="button" class="btn btn-back" onclick="go(1)">Back</button>
+      <button type="button" class="btn btn-next" onclick="go(3)">Continue <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px"><path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
+  </div>
+</div>
+
+<!-- ─── 03 Delivery ─── -->
+<div class="stage" data-stage="3">
+  <div class="card">
+    <div class="card-head">
+      <div class="num">03</div>
+      <div><h2>Delivery &amp; Logistics</h2><p>When and how the equipment arrives.</p></div>
+    </div>
+    <div class="card-body">
+      <div class="grid">
+        <div class="f span12"><label>Delivery Address</label><div class="hint">Leave blank if it matches the customer address above.</div><input name="del_addr" placeholder="Street address"></div>
+        <div class="f span6"><label>Delivery Contact</label><input name="del_contact" placeholder="Name onsite"></div>
+        <div class="f span6"><label>Delivery Contact Phone</label><input name="del_phone" placeholder="(416) 000-0000"></div>
+        <div class="f span6"><label>Delivery Date</label><input type="date" name="del_date"></div>
+        <div class="f span6"><label>Preferred Time</label>
+          <select name="del_time"><option value="">Select a window</option><option>Morning 8am&ndash;12pm</option><option>Afternoon 12pm&ndash;5pm</option><option>Specific &mdash; described in instructions</option></select>
+        </div>
+        <div class="f span6"><label>Loading Dock</label>
+          <div class="pills"><label class="pill"><input type="radio" name="del_dock" value="Yes"><span>Yes</span></label><label class="pill"><input type="radio" name="del_dock" value="No"><span>No</span></label><label class="pill"><input type="radio" name="del_dock" value="N/A"><span>N/A</span></label></div>
+        </div>
+        <div class="f span6"><label>Elevator</label>
+          <div class="pills"><label class="pill"><input type="radio" name="del_elev" value="Yes"><span>Yes</span></label><label class="pill"><input type="radio" name="del_elev" value="No"><span>No</span></label></div>
+        </div>
+        <div class="f span6"><label>Floor #</label><input name="del_floor" placeholder="2"></div>
+        <div class="f span6"><label>Number of Stairs</label><input name="del_stairs" placeholder="0 / 12 / etc."></div>
+        <div class="f span12"><label>Delivery Instructions</label><div class="hint">Entrance, security codes, parking, after-hours access, receiving area.</div><textarea name="del_instructions"></textarea></div>
+      </div>
+    </div>
+    <div class="card-body btns">
+      <button type="button" class="btn btn-back" onclick="go(2)">Back</button>
+      <button type="button" class="btn btn-next" onclick="go(4)">Continue <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px"><path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
+  </div>
+</div>
+
+<!-- ─── 04 Equipment ─── -->
+<div class="stage" data-stage="4">
+  <div class="card">
+    <div class="card-head">
+      <div class="num">04</div>
+      <div><h2>Equipment &amp; Configuration</h2><p>One record per unit &mdash; add as many as you need.</p></div>
+    </div>
+    <div class="card-body">
+      <div class="stack" id="eqStack"></div>
+      <button type="button" class="add" id="addMfp" onclick="addMFP()">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg>
+        Add Another Unit
+      </button>
+    </div>
+    <div class="card-body btns">
+      <button type="button" class="btn btn-back" onclick="go(3)">Back</button>
+      <button type="button" class="btn btn-next" onclick="go(5)">Continue <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px"><path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
+  </div>
+</div>
+
+<!-- ─── 05 Pickup ─── -->
+<div class="stage" data-stage="5">
+  <div class="card">
+    <div class="card-head">
+      <div class="num">05</div>
+      <div><h2>Pickup &amp; Site Notes</h2><p>Old equipment and any unusual site conditions.</p></div>
+    </div>
+    <div class="card-body">
+      <div class="grid">
+        <div class="f span12"><label>Do you need old equipment picked up?</label>
+          <div class="pills"><label class="pill"><input type="radio" name="pickup" value="Yes"><span>Yes</span></label><label class="pill"><input type="radio" name="pickup" value="No"><span>No</span></label><label class="pill"><input type="radio" name="pickup" value="Not sure"><span>Not sure yet</span></label></div>
+        </div>
+        <div class="f span12"><label>Pickup Details</label><div class="hint">Number of machines, address if different, date, access via dock / elevator / stairs.</div><textarea name="pickup_notes"></textarea></div>
+        <div class="f span12"><label>Special Site Requirements</label><div class="hint">Tight hallways, floor protection, security clearance, after-hours, construction, multiple floors.</div><textarea name="special_req"></textarea></div>
+      </div>
+    </div>
+    <div class="card-body btns">
+      <button type="button" class="btn btn-back" onclick="go(4)">Back</button>
+      <button type="button" class="btn btn-next" onclick="go(6)">Continue <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px"><path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
+  </div>
+</div>
+
+<!-- ─── 06 IT & Network ─── -->
+<div class="stage" data-stage="6">
+  <div class="card">
+    <div class="card-head">
+      <div class="num">06</div>
+      <div><h2>IT &amp; Network Configuration</h2><p>For your IT team &mdash; or leave blank and we coordinate directly.</p></div>
+    </div>
+    <div class="card-body">
+      <div class="grid">
+        <div class="f span6"><label>IT Contact Name</label><input name="it_name" placeholder="IT administrator"></div>
+        <div class="f span6"><label>IT Contact Email</label><input type="email" name="it_email" placeholder="it@company.com"></div>
+        <div class="f span12"><label>IT Contact Phone</label><input name="it_phone" placeholder="(416) 000-0000"></div>
+        <div class="f span6"><label>TCP / IP</label><input name="tcp_ip" placeholder="10.0.0.24"></div>
+        <div class="f span6"><label>Subnet</label><input name="subnet" placeholder="255.255.255.0"></div>
+        <div class="f span6"><label>Gateway</label><input name="gateway" placeholder="10.0.0.1"></div>
+        <div class="f span6"><label>Primary DNS</label><input name="dns1" placeholder="8.8.8.8"></div>
+        <div class="f span6"><label>Secondary DNS</label><input name="dns2" placeholder="8.8.4.4"></div>
+        <div class="f span6"><label>Workgroup</label><input name="workgroup" placeholder="WORKGROUP"></div>
+        <div class="f span6"><label>Hostname</label><input name="hostname" placeholder="MFP-CONF-01"></div>
+        <div class="f span6"><label>Domain Name</label><input name="domain" placeholder="company.local"></div>
+        <div class="f span12"><label>Network Notes</label><div class="hint">VLANs, reserved addresses, firewall, DHCP vs static, print server.</div><textarea name="net_notes"></textarea></div>
+      </div>
+
+      <!-- Optional scanning / fax configure -->
+      <div style="margin-top:26px">
+        <div class="feat">
+          <button type="button" class="bar" onclick="toggle(this)">
+            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M2 8h20M6 12h4" stroke-linecap="round"/></svg></span>
+            <span class="ttl"><strong>Scan to Email</strong><em>SMTP server &amp; credentials</em></span>
+            <span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </button>
+          <div class="panel"><div class="panel-in">
+            <div class="f span6"><label>SMTP Server</label><input name="smtp_server" placeholder="smtp.company.com"></div>
+            <div class="f span6"><label>SMTP IP Address</label><input name="smtp_ip" placeholder="10.0.0.5"></div>
+            <div class="f span12"><label>Authentication Required?</label>
+              <div class="pills"><label class="pill"><input type="radio" name="smtp_auth" value="Yes"><span>Yes</span></label><label class="pill"><input type="radio" name="smtp_auth" value="No"><span>No</span></label></div>
+            </div>
+            <div class="f span6"><label>SMTP Username</label><input name="smtp_user"></div>
+            <div class="f span6"><label>SMTP Password</label><input type="password" name="smtp_pass"><div class="hint">Provided on-site if preferred.</div></div>
+          </div></div>
+        </div>
+
+        <div class="feat">
+          <button type="button" class="bar" onclick="toggle(this)">
+            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M4 4h16v16H4zM9 9h6M9 13h6" stroke-linecap="round"/></svg></span>
+            <span class="ttl"><strong>Scan to Folder</strong><em>Network folder path &amp; access</em></span>
+            <span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </button>
+          <div class="panel"><div class="panel-in">
+            <div class="f span12"><label>Network Folder Path</label><input name="scan_path" placeholder="\\server\share\scans"></div>
+            <div class="f span6"><label>Username</label><input name="scan_user"></div>
+            <div class="f span6"><label>Password</label><input type="password" name="scan_pass"><div class="hint">Provided on-site if preferred.</div></div>
+          </div></div>
+        </div>
+
+        <div class="feat">
+          <button type="button" class="bar" onclick="toggle(this)">
+            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 21h8M12 18v3" stroke-linecap="round"/></svg></span>
+            <span class="ttl"><strong>Scan to Desktop</strong><em>Workstation destination</em></span>
+            <span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </button>
+          <div class="panel"><div class="panel-in">
+            <div class="f span6"><label>Desktop Hostname / IP</label><input name="desktop_host"></div>
+            <div class="f span6"><label>Shared Folder</label><input name="desktop_folder"></div>
+            <div class="f span12"><label>Desktop Scan Notes</label><textarea name="desktop_notes"></textarea></div>
+          </div></div>
+        </div>
+
+        <div class="feat">
+          <button type="button" class="bar" onclick="toggle(this)">
+            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M4 7V4l16 3v3H4zM4 7v11a2 2 0 002 2h12a2 2 0 002-2V7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="ttl"><strong>Fax Configuration</strong><em>Line, type &amp; preferences</em></span>
+            <span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </button>
+          <div class="panel"><div class="panel-in">
+            <div class="f span6"><label>Fax Line Number</label><input name="fax_number"></div>
+            <div class="f span6"><label>Fax Type</label>
+              <select name="fax_type"><option value="">Select</option><option>Analog (phone line)</option><option>Fax over IP (FoIP)</option><option>Shared / Virtual</option></select>
+            </div>
+            <div class="f span12"><label>Fax Notes</label><textarea name="fax_notes"></textarea></div>
+          </div></div>
+        </div>
+      </div>
+
+      <div class="grid"><div class="f span12"><label>Additional Notes / Security Requirements</label><textarea name="sec_notes"></textarea></div></div>
+    </div>
+    <div class="card-body btns">
+      <button type="button" class="btn btn-back" onclick="go(5)">Back</button>
+      <button type="button" class="btn btn-next" onclick="go(7)">Continue <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px"><path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
+  </div>
+</div>
+
+<!-- ─── 07 Sign-Off ─── -->
+<div class="stage" data-stage="7">
+  <div class="card">
+    <div class="card-head">
+      <div class="num">07</div>
+      <div><h2>Review &amp; Sign-Off</h2><p>Confirm the details and submit.</p></div>
+    </div>
+    <div class="card-body">
+      <div class="grid">
+        <div class="f span6"><label>Estimated Installation Date</label><input type="date" name="install_date"></div>
+        <div class="f span6"><label>Sign-Off Date <span class="req">*</span></label><input type="date" name="sig_date" required></div>
+        <div class="f span12"><label>Customer Name (Digital Signature) <span class="req">*</span></label><input name="sig_name" placeholder="Full name" required></div>
+        <div class="f span12"><label>Additional Comments</label><textarea name="comments"></textarea></div>
+      </div>
+    </div>
+    <div class="card-body btns">
+      <button type="button" class="btn btn-back" onclick="go(6)">Back</button>
+      <button type="submit" class="btn btn-submit" id="goSubmit">Submit Survey</button>
+    </div>
+  </div>
+</div>
+
+<!-- ─── Success ─── -->
+<div class="card done" id="successMsg">
+  <div class="done">
+    <div class="ring"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <h2>Thank you.</h2>
+    <p>Your site survey is in. Our team will review the details and reach out if anything needs clarification.</p>
+    <p class="ph">Questions? Call 416-240-1700</p>
+  </div>
+</div>
+
+</form>
+</section>
+
+<!-- ═══════════ MARQUEE ═══════════ -->
+<div class="marquee">
+  <div class="track">
+    <span>Network Print</span><span>Wi-Fi &amp; Mobile</span><span>Scan to Email</span><span>Scan to Folder</span><span>Scan to Desktop</span><span>Fax</span><span>Finishing &amp; Accessories</span>
+    <span>Network Print</span><span>Wi-Fi &amp; Mobile</span><span>Scan to Email</span><span>Scan to Folder</span><span>Scan to Desktop</span><span>Fax</span><span>Finishing &amp; Accessories</span>
+  </div>
+</div>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer>
+  <div class="row">
+    <div class="word">ASCA OFFICE SOLUTIONS</div>
+    <div class="meta">100 Arbors Lane, Unit H, Vaughan, ON L4L 7G4 &nbsp;&middot;&nbsp; <a href="tel:4162401700">416-240-1700</a> &nbsp;&middot;&nbsp; <a href="https://www.ascaofficesolutions.com" target="_blank" rel="noopener">ascaofficesolutions.com</a></div>
+  </div>
+</footer>
+
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz8HUBI-LtF-3aMSaFqCW7MiRdXIpLd-hFQ1PDRuiyzQ_DQ8Ox9BRReLq-FabIMX_ug/exec';
+const total = 9;
+let cur = 1;
+
+/* Stage switching with GSAP transition */
+function go(n){
+  const out = cur, inn = n;
+  if(out === inn) return;
+  const outEl = document.querySelector(`[data-stage="${out}"]`);
+  const inEl  = document.querySelector(`[data-stage="${inn}"]`);
+  gsap.to(outEl, {y:-24, opacity:0, duration:.28, ease:'power2.in', onComplete(){
+    outEl.classList.remove('show');
+    inEl.classList.add('show');
+    gsap.fromTo(inEl, {y:28, opacity:0}, {y:0, opacity:1, duration:.5, ease:'power3.out'});
+    window.scrollTo({top:0, behavior:'smooth'});
+  }});
+  cur = inn;
+  paintRail();
+}
+function paintRail(){
+  document.getElementById('curIdx').textContent = String(cur).padStart(2,'0');
+  const track = document.getElementById('railTrack');
+  gsap.utils.toArray(track.children).forEach((s,i)=>{
+    const now = cur, idx = i+1;
+    s.classList.toggle('on', idx===now);
+    s.classList.toggle('done', idx<now);
+  });
+}
+paintRail();
+
+/* Feature toggle panels - GSAP height reveal */
+function toggle(bar){
+  const feat = bar.closest('.feat');
+  const panel = feat.querySelector('.panel');
+  const open = !feat.classList.contains('on');
+  feat.classList.toggle('on', open);
+  if(open){
+    gsap.set(panel, {height:'auto'});
+    const h = panel.offsetHeight;
+    gsap.set(panel, {height:0});
+    gsap.to(panel, {height:h, opacity:1, duration:.5, ease:'power3.inOut', onComplete(){gsap.set(panel,{height:'auto'})}});
+  } else {
+    gsap.to(panel, {height:0, opacity:0, duration:.4, ease:'power2.in'});
+  }
+}
+
+/* Equipment cards */
+let eqCount = 0;
+function addMFP(){
+  eqCount++;
+  const n = eqCount, tpl = document.createElement('div');
+  tpl.className = 'eq'; tpl.id = 'eq_'+n;
+  tpl.innerHTML = `
+    <div class="hd">
+      <div class="t">Unit ${String(n).padStart(2,'0')}</div>
+      <button type="button" class="rm" onclick="removeMFP(${n})">Remove</button>
+    </div>
+    <div class="grid">
+      <div class="f span6"><label>Make / Manufacturer</label><input name="eq${n}_make" placeholder="Ricoh / HP / Canon"></div>
+      <div class="f span6"><label>Model</label><input name="eq${n}_model" placeholder="IM C4500"></div>
+      <div class="f span4"><label>Serial Number</label><input name="eq${n}_sn"></div>
+      <div class="f span4"><label>EQ / Asset #</label><input name="eq${n}_asset"></div>
+      <div class="f span4"><label>Quantity</label><input name="eq${n}_qty" type="number" min="1" value="1"></div>
+      <div class="f span6"><label>Power Requirement</label>
+        <select name="eq${n}_power"><option value="">Select</option><option>120V 15A &mdash; NEMA 5-15</option><option>120V 20A &mdash; NEMA 5-20</option><option>220V 20A &mdash; NEMA 6-20</option><option>Unknown / Verify</option></select>
+      </div>
+      <div class="f span6"><label>Default Print Driver</label>
+        <div class="pills"><label class="pill"><input type="radio" name="eq${n}_driver" value="B&W"><span>B&amp;W</span></label><label class="pill"><input type="radio" name="eq${n}_driver" value="Colour"><span>Colour</span></label><label class="pill"><input type="radio" name="eq${n}_driver" value="Auto"><span>Auto</span></label></div>
+      </div>
+      <div class="f span12"><label>Connectivity Required</label>
+        <div class="pills">
+          <label class="pill"><input type="checkbox" name="eq${n}_conn" value="Network Print"><span>Network Print</span></label>
+          <label class="pill"><input type="checkbox" name="eq${n}_conn" value="Wi-Fi Print"><span>Wi-Fi Print</span></label>
+          <label class="pill"><input type="checkbox" name="eq${n}_conn" value="Mobile Print"><span>Mobile Print</span></label>
+          <label class="pill"><input type="checkbox" name="eq${n}_conn" value="Scan to Folder"><span>Scan to Folder</span></label>
+          <label class="pill"><input type="checkbox" name="eq${n}_conn" value="Scan to Email"><span>Scan to Email</span></label>
+          <label class="pill"><input type="checkbox" name="eq${n}_conn" value="Fax"><span>Fax</span></label>
+        </div>
+      </div>
+      <div class="f span12"><label>Physical Configuration / Dimensions</label><div class="hint">Drawers, cabinets, finishers, feeders, stands, dimensions.</div><textarea name="eq${n}_config"></textarea></div>
+      <div class="f span12"><label>Placement / Room / Floor</label><textarea name="eq${n}_place" placeholder="Room number, department, clearance concerns"></textarea></div>
+    </div>`;
+  document.getElementById('eqStack').appendChild(tpl);
+  gsap.from(tpl, {y:26, opacity:0, scale:.985, duration:.5, ease:'power3.out'});
+}
+function removeMFP(n){
+  const el = document.getElementById('eq_'+n);
+  if(!el) return;
+  gsap.to(el, {y:-16, opacity:0, scale:.98, duration:.3, ease:'power2.in', onComplete(){el.remove()}});
+}
+addMFP();
+
+/* Scroll scale/fade for cards */
+gsap.utils.toArray('.card, .marquee').forEach((el)=>{
+  if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    gsap.fromTo(el, {opacity:0, scale:.94, y:30},
+      {opacity:1, scale:1, y:0, duration:.9, ease:'power3.out',
+       scrollTrigger:{trigger:el, start:'top 92%'}});
+  }
+});
+
+/* Hero intro */
+gsap.registerPlugin(ScrollTrigger);
+if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+  const tl = gsap.timeline({defaults:{ease:'power3.out'}});
+  tl.from('.hero h1', {y:40, opacity:0, duration:.9})
+    .from('.hero .lede', {y:24, opacity:0, duration:.7}, '-=.5')
+    .from('.hero .ctas .btn', {y:18, opacity:0, duration:.55, stagger:.1}, '-=.45')
+    .from('.hero .eyebrow', {opacity:0, duration:.6}, '-=.8');
+  gsap.fromTo('.hero', {backgroundPosition:'50% 0%'}, {backgroundPosition:'50% 100%',
+    ease:'none', scrollTrigger:{trigger:'.hero', start:'top top', end:'bottom top', scrub:true}});
+}
+
+/* Submit */
+document.getElementById('form').addEventListener('submit', function(ev){
+  ev.preventDefault();
+  const fd = new FormData(this);
+  const data = {};
+  fd.forEach(function(v,k){
+    if(data[k]){ if(Array.isArray(data[k])) data[k].push(v); else data[k]=[data[k],v]; }
+    else data[k]=v;
+  });
+  data._equipment = [];
+  document.querySelectorAll('.eq').forEach(card=>{
+    const eq = {};
+    card.querySelectorAll('input,select,textarea').forEach(el=>{
+      if(!el.name) return;
+      if(el.type==='checkbox'){
+        if(el.checked){ eq[el.name] = eq[el.name]||[]; eq[el.name].push(el.value); }
+      } else if(el.type==='radio'){
+        if(el.checked) eq[el.name]=el.value;
+      } else {
+        if(el.value) eq[el.name]=el.value;
+      }
+    });
+    data._equipment.push(eq);
+  });
+
+  const sub = document.getElementById('goSubmit');
+  if(SCRIPT_URL.includes('YOUR_GOOGLE_APPS_SCRIPT')){
+    const blob = new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+    const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='site-survey-'+Date.now()+'.json'; a.click();
+    finish();
+    return;
+  }
+  sub.textContent='Submitting...'; sub.disabled=true;
+  fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=UTF-8'},body:JSON.stringify(data)})
+    .then(finish)
+    .catch(function(){ alert('Submission failed. Please try again or call 416-240-1700.'); sub.textContent='Submit Survey'; sub.disabled=false; });
+});
+function finish(){
+  document.querySelectorAll('.stage').forEach(s=>s.classList.remove('show'));
+  const done=document.getElementById('successMsg');
+  done.classList.add('show');
+  gsap.from(done, {opacity:0, scale:.94, duration:.6, ease:'power3.out'});
+  document.querySelector('.rail-wrap').style.display='none';
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+</script>
+</body>
+</html>

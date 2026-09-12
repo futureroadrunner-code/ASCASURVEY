@@ -97,14 +97,14 @@
   .f span4{grid-column:span 4}
   @media(max-width:640px){.f span12,.f span6,.f span4{grid-column:span 12}}
 
-  .f label{display:block;font-size:13px;font-weight:500;color:var(--bone-dim);margin-bottom:8px;letter-spacing:.01em}
+  .f label{display:block;font-size:14px;font-weight:500;color:var(--bone-dim);margin-bottom:9px;letter-spacing:.01em}
   .f label .req{color:var(--gold);margin-left:2px}
   .f .hint{font-size:12.5px;color:var(--bone-dim);opacity:.85;margin:-4px 0 8px;font-weight:300;line-height:1.55}
-  .f input,.f select,.f textarea{width:100%;padding:18px 20px;min-height:58px;background:rgba(11,11,13,.55);border:1px solid rgba(233,228,218,.12);border-radius:12px;color:var(--bone);font-family:'Manrope',sans-serif;font-size:17px;line-height:1.5;transition:border-color .3s,box-shadow .3s,background .3s;font-weight:400}
-  .f input::placeholder,.f textarea::placeholder{color:var(--bone-dim);opacity:.6;font-size:16px}
+  .f input,.f select,.f textarea{width:100%;padding:20px 22px;min-height:64px;background:rgba(11,11,13,.55);border:1px solid rgba(233,228,218,.12);border-radius:12px;color:var(--bone);font-family:'Manrope',sans-serif;font-size:18px;line-height:1.5;transition:border-color .3s,box-shadow .3s,background .3s;font-weight:400}
+  .f input::placeholder,.f textarea::placeholder{color:var(--bone-dim);opacity:.6;font-size:17px}
   .f input:focus,.f select:focus,.f textarea:focus{outline:none;border-color:var(--gold);background:rgba(11,11,13,.85);box-shadow:0 0 0 3px rgba(201,164,92,.12)}
-  .f select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23b6b0a3' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 20px center}
-  .f select option{background:var(--ink-2);color:var(--bone);font-size:16px}
+  .f select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23b6b0a3' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 22px center}
+  .f select option{background:var(--ink-2);color:var(--bone);font-size:17px}
   .f textarea{min-height:150px;resize:vertical}
 
   /* Pill radios / checkboxes */
@@ -266,8 +266,8 @@
         <div class="f span4"><label>Province <span class="req">*</span></label><input name="cust_prov" placeholder="ON" required></div>
         <div class="f span4"><label>Postal Code <span class="req">*</span></label><input name="cust_postal" placeholder="L4L 7G4" required></div>
         <div class="f span12"><label>Contact Name <span class="req">*</span></label><input name="cust_contact" placeholder="Primary contact" required></div>
-        <div class="f span6"><label>Phone / Ext / Cell <span class="req">*</span></label><input name="cust_phone" placeholder="(416) 000-0000" required></div>
-        <div class="f span6"><label>Email <span class="req">*</span></label><input type="email" name="cust_email" placeholder="name@company.com" required></div>
+        <div class="f span12"><label>Phone / Ext / Cell <span class="req">*</span></label><input name="cust_phone" placeholder="(416) 000-0000" required></div>
+        <div class="f span12"><label>Email <span class="req">*</span></label><input type="email" name="cust_email" placeholder="name@company.com" required></div>
         <div class="f span12"><label>Fax</label><input name="cust_fax" placeholder="If applicable"></div>
       </div>
     </div>
@@ -288,8 +288,8 @@
     <div class="card-body">
       <div class="grid">
         <div class="f span12"><label>Delivery Address</label><div class="hint">Leave blank if it matches the customer address above.</div><input name="del_addr" placeholder="Street address"></div>
-        <div class="f span6"><label>Delivery Contact</label><input name="del_contact" placeholder="Name onsite"></div>
-        <div class="f span6"><label>Delivery Contact Phone</label><input name="del_phone" placeholder="(416) 000-0000"></div>
+        <div class="f span12"><label>Delivery Contact</label><input name="del_contact" placeholder="Name onsite"></div>
+        <div class="f span12"><label>Delivery Contact Phone</label><input name="del_phone" placeholder="(416) 000-0000"></div>
         <div class="f span6"><label>Delivery Date</label><input type="date" name="del_date"></div>
         <div class="f span6"><label>Preferred Time</label>
           <select name="del_time"><option value="">Select a window</option><option>Morning 8am&ndash;12pm</option><option>Afternoon 12pm&ndash;5pm</option><option>Specific &mdash; described in instructions</option></select>
@@ -365,8 +365,8 @@
     </div>
     <div class="card-body">
       <div class="grid">
-        <div class="f span6"><label>IT Contact Name</label><input name="it_name" placeholder="IT administrator"></div>
-        <div class="f span6"><label>IT Contact Email</label><input type="email" name="it_email" placeholder="it@company.com"></div>
+        <div class="f span12"><label>IT Contact Name</label><input name="it_name" placeholder="IT administrator"></div>
+        <div class="f span12"><label>IT Contact Email</label><input type="email" name="it_email" placeholder="it@company.com"></div>
         <div class="f span12"><label>IT Contact Phone</label><input name="it_phone" placeholder="(416) 000-0000"></div>
         <div class="f span6"><label>TCP / IP</label><input name="tcp_ip" placeholder="10.0.0.24"></div>
         <div class="f span6"><label>Subnet</label><input name="subnet" placeholder="255.255.255.0"></div>
@@ -576,8 +576,8 @@ function addMFP(){
       <button type="button" class="rm" onclick="removeMFP(${n})">Remove</button>
     </div>
     <div class="grid">
-      <div class="f span6"><label>Make / Manufacturer</label><input name="eq${n}_make" placeholder="Ricoh / HP / Canon"></div>
-      <div class="f span6"><label>Model</label><input name="eq${n}_model" placeholder="IM C4500"></div>
+      <div class="f span12"><label>Make / Manufacturer</label><input name="eq${n}_make" placeholder="Ricoh / HP / Canon"></div>
+      <div class="f span12"><label>Model</label><input name="eq${n}_model" placeholder="IM C4500"></div>
       <div class="f span4"><label>Serial Number</label><input name="eq${n}_sn"></div>
       <div class="f span4"><label>EQ / Asset #</label><input name="eq${n}_asset"></div>
       <div class="f span4"><label>Quantity</label><input name="eq${n}_qty" type="number" min="1" value="1"></div>

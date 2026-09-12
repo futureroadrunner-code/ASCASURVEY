@@ -517,6 +517,13 @@ function go(n){
   if(out === inn) return;
   const outEl = document.querySelector(`[data-stage="${out}"]`);
   const inEl  = document.querySelector(`[data-stage="${inn}"]`);
+  if(!window.gsap){
+    outEl.classList.remove('show');
+    inEl.classList.add('show');
+    cur = inn; paintRail();
+    window.scrollTo({top:0, behavior:'smooth'});
+    return;
+  }
   gsap.to(outEl, {y:-24, opacity:0, duration:.28, ease:'power2.in', onComplete(){
     outEl.classList.remove('show');
     inEl.classList.add('show');
@@ -543,6 +550,10 @@ function toggle(bar){
   const panel = feat.querySelector('.panel');
   const open = !feat.classList.contains('on');
   feat.classList.toggle('on', open);
+  if(!window.gsap){
+    panel.style.display = open ? 'block' : 'none';
+    return;
+  }
   if(open){
     gsap.set(panel, {height:'auto'});
     const h = panel.offsetHeight;
@@ -590,27 +601,28 @@ function addMFP(){
       <div class="f span12"><label>Placement / Room / Floor</label><textarea name="eq${n}_place" placeholder="Room number, department, clearance concerns"></textarea></div>
     </div>`;
   document.getElementById('eqStack').appendChild(tpl);
-  gsap.from(tpl, {y:26, opacity:0, scale:.985, duration:.5, ease:'power3.out'});
+  if(window.gsap) gsap.from(tpl, {y:26, opacity:0, scale:.985, duration:.5, ease:'power3.out'});
 }
 function removeMFP(n){
   const el = document.getElementById('eq_'+n);
   if(!el) return;
+  if(!window.gsap){ el.remove(); return; }
   gsap.to(el, {y:-16, opacity:0, scale:.98, duration:.3, ease:'power2.in', onComplete(){el.remove()}});
 }
 addMFP();
 
 /* Scroll scale/fade for cards */
+if(window.gsap && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
 gsap.utils.toArray('.card, .marquee').forEach((el)=>{
-  if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
     gsap.fromTo(el, {opacity:0, scale:.94, y:30},
       {opacity:1, scale:1, y:0, duration:.9, ease:'power3.out',
        scrollTrigger:{trigger:el, start:'top 92%'}});
-  }
-});
+  });
+}
 
 /* Hero intro */
-gsap.registerPlugin(ScrollTrigger);
-if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+if(window.gsap) gsap.registerPlugin(ScrollTrigger);
+if(window.gsap && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
   const tl = gsap.timeline({defaults:{ease:'power3.out'}});
   tl.from('.hero h1', {y:40, opacity:0, duration:.9})
     .from('.hero .lede', {y:24, opacity:0, duration:.7}, '-=.5')
@@ -676,7 +688,7 @@ function finish(){
   document.querySelectorAll('.stage').forEach(s=>s.classList.remove('show'));
   const done=document.getElementById('successMsg');
   done.classList.add('show');
-  gsap.from(done, {opacity:0, scale:.94, duration:.6, ease:'power3.out'});
+  if(window.gsap) gsap.from(done, {opacity:0, scale:.94, duration:.6, ease:'power3.out'});
   document.querySelector('.rail-wrap').style.display='none';
   window.scrollTo({top:0, behavior:'smooth'});
 }

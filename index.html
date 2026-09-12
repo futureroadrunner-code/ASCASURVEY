@@ -621,8 +621,10 @@ if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
 }
 
 /* Submit */
+let submitting = false;
 document.getElementById('form').addEventListener('submit', function(ev){
   ev.preventDefault();
+  if(submitting) return;
   const fd = new FormData(this);
   const data = {};
   fd.forEach(function(v,k){
@@ -652,10 +654,23 @@ document.getElementById('form').addEventListener('submit', function(ev){
     finish();
     return;
   }
+  submitting = true;
   sub.textContent='Submitting...'; sub.disabled=true;
-  fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=UTF-8'},body:JSON.stringify(data)})
-    .then(finish)
-    .catch(function(){ alert('Submission failed. Please try again or call 416-240-1700.'); sub.textContent='Submit Survey'; sub.disabled=false; });
+  const ctrl = new AbortController();
+  const timer = setTimeout(function(){ ctrl.abort(); }, 25000);
+  fetch(SCRIPT_URL,{method:'POST',signal:ctrl.signal,headers:{'Content-Type':'text/plain;charset=UTF-8'},body:JSON.stringify(data)})
+    .then(function(r){ return r.json(); })
+    .then(function(res){
+      clearTimeout(timer);
+      if(res && res.status === 'ok'){ finish(); }
+      else { throw new Error('Unexpected response'); }
+    })
+    .catch(function(){
+      clearTimeout(timer);
+      submitting = false;
+      alert('We could not submit your survey. Nothing has been sent. Please check your connection and try again, or call 416-240-1700.');
+      sub.textContent='Submit Survey'; sub.disabled=false;
+    });
 });
 function finish(){
   document.querySelectorAll('.stage').forEach(s=>s.classList.remove('show'));
